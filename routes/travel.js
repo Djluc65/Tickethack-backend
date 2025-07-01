@@ -22,24 +22,32 @@ function dateFormat(params) {
     return searchDate
 }
 
-router.post('/search', (req, res) => {
-    Travel.find({ departure: req.body.departure, arrival: req.body.arrival }).then(data => {
 
-        for (let index = 0; index < data.length; index++) {
+router.get('/search/:departure/:arrival/:date', (req, res) => {
+    Travel.find({ departure: req.params.departure, arrival: req.params.arrival }).then(data => {
+        console.log(data)
+        if (data.length != 0) {
 
-            const result = data.filter((travel) => dateFormat(travel.date) === req.body.date);
-            
-            console.log(result)
-            if (result) {
-                res.json({ travel: result })
-                return
-            } else {
-                res.json({ travel: 'error' })
-                return
+            for (let index = 0; index < data.length; index++) {
+
+                const result = data.filter((travel) => dateFormat(travel.date) === req.params.date);
+                if (result) {
+                    res.json({ result: true, travel: result })
+                    return
+                } else {
+                    res.json({ result: false })
+                    return
+                }
             }
+        } else {
+
+            console.log('result false')
+            res.json({ result: false })
+            return
         }
     });
 })
+
 
 
 router.get('/all', (req, res) => {
