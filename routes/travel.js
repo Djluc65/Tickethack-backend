@@ -5,28 +5,21 @@ const fetch = require('node-fetch');
 const Travel = require('../models/travel');
 
 
-router.post('/',(req,res) => {
-    Travel.find()
+router.get('/',(req,res) => {
+    Travel.find(departure === req.body.departure, arrival === req.body.arrival,  date === req.body.date, price === req.body.price)
     .then (data => {
-        const newTravel = new Travral ({
-            departure : req.body.departure,
-            arrival : req.body.arrival,
-            date : req.body.date
-                price : req.body.price
-        })
-        newTravel.save();
-        res.json({result : true, travel : newTravel});
+             res.json({result : true, travel : newTravel});
     })
 })
 
 
 
 
-router.get('/',(req,res) => {
-    Travel.find().then (data => {
-        res.json ({travel: data})
-    })
-});
+// router.get('/',(req,res) => {
+//     Travel.find().then (data => {
+//         res.json ({travel: data})
+//     })
+// });
 
 
 
