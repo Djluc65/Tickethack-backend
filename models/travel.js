@@ -8,4 +8,5 @@ const travelSchema = mongoose.Schema({
 });
 
 const Travel = mongoose.model("travels", travelSchema);
+
 module.exports = Travel;
