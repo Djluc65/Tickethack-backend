@@ -1,16 +1,10 @@
 const mongoose = require('mongoose');
 
-const dependency = {"moment": Number,
-                    "moment-random": Number}
-
-const generate = {"generate": "node generateTrips.js"}
 
 const travelSchema = mongoose.Schema({
-  "name": String,
-  "version": Number,
-  "private": Boolean,
-  "scripts": generate,
-  "dependencies": dependency
+  "departure": String,
+  "arrival": String,
+  "date": date,
 });
 
 const Travel = mongoose.Model('travels', travelSchema);
