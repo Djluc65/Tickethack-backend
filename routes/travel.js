@@ -28,7 +28,6 @@ router.post('/search', (req, res) => {
         for (let index = 0; index < data.length; index++) {
 
             const result = data.filter((travel) => dateFormat(travel.date) === req.body.date);
-
             
             console.log(result)
             if (result) {
@@ -39,6 +38,13 @@ router.post('/search', (req, res) => {
                 return
             }
         }
+    });
+})
+
+
+router.get('/all', (req, res) => {
+    Travel.find().then(data => {
+        res.json({ travel: data })
     });
 })
 

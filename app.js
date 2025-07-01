@@ -6,10 +6,14 @@ var logger = require('morgan');
 
 require('./models/connection');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var travelRouter = require('./routes/travel');
 var app = express();
+
+const cors = require('cors');
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
