@@ -2,16 +2,17 @@ var express = require('express');
 var router = express.Router();
 
 const fetch = require('node-fetch');
-const Travel = require('../models/travels');
+const Travel = require('../models/travel');
 
 
 router.post('/',(req,res) => {
-    Travel.find().then (response => response.json())
+    Travel.find()
     .then (data => {
         const newTravel = new Travral ({
             departure : req.body.departure,
             arrival : req.body.arrival,
             date : req.body.date
+                price : req.body.price
         })
         newTravel.save();
         res.json({result : true, travel : newTravel});
@@ -22,11 +23,10 @@ router.post('/',(req,res) => {
 
 
 router.get('/',(req,res) => {
-    Travel.find().then (response => response.json())
-    .then (data => {
-        res.json ({data})
+    Travel.find().then (data => {
+        res.json ({travel: data})
     })
-})
+});
 
 
 
