@@ -27,11 +27,9 @@ router.get('/search/:departure/:arrival/:date', (req, res) => {
     Travel.find({ departure: req.params.departure, arrival: req.params.arrival }).then(data => {
         console.log(data)
         if (data.length != 0) {
-
             for (let index = 0; index < data.length; index++) {
-
                 const result = data.filter((travel) => dateFormat(travel.date) === req.params.date);
-                if (result) {
+                if (result.length != 0) {
                     res.json({ result: true, travel: result })
                     return
                 } else {
@@ -40,7 +38,6 @@ router.get('/search/:departure/:arrival/:date', (req, res) => {
                 }
             }
         } else {
-
             console.log('result false')
             res.json({ result: false })
             return
