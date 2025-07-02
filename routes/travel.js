@@ -24,10 +24,14 @@ function dateFormat(params) {
 
 
 router.get('/search/:departure/:arrival/:date', (req, res) => {
-    Travel.find({ departure: req.params.departure, arrival: req.params.arrival }).then(data => {
+    Travel.find({
+        departure: new RegExp(req.params.departure, "i"),
+        arrival: new RegExp(req.params.arrival, "i")
+    }).then(data => {
         console.log(data)
         if (data.length != 0) {
             for (let index = 0; index < data.length; index++) {
+
                 const result = data.filter((travel) => dateFormat(travel.date) === req.params.date);
                 if (result.length != 0) {
                     res.json({ result: true, travel: result })
@@ -44,8 +48,6 @@ router.get('/search/:departure/:arrival/:date', (req, res) => {
         }
     });
 })
-
-
 
 router.get('/all', (req, res) => {
     Travel.find().then(data => {
