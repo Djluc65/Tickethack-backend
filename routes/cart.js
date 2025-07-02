@@ -1,0 +1,41 @@
+var express = require('express');
+var router = express.Router();
+
+const fetch = require('node-fetch');
+const Cart = require('../models/cart');
+
+router.post('/create', (req, res) => {
+    const newUser = new Cart({
+        da: req.body.da,
+        date: req.body.date,
+        price: req.body.price
+    });
+
+    newUser.save()
+           res.json({ cart: true })
+})
+
+router.get('/all', (req, res) => {
+    Cart.find().then(data => {
+        res.json({ cart: data })
+    });
+})
+
+
+
+
+
+
+
+
+
+
+
+
+// router.get('/',(req,res) => {
+// res.json ({allTravel: travel});
+// });
+
+
+
+module.exports = router;
