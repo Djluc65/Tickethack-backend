@@ -20,7 +20,18 @@ router.get('/all', (req, res) => {
         res.json({ cart: data })
     });
 })
-
+router.delete('/delete/:id', (req, res) => {
+    Cart.deleteOne({ _id: req.params.id }).then(deletedDoc => {
+        if (deletedDoc.deletedCount > 0) {
+            res.json({ result: true });
+        } else {
+            res.json({ result: false, error: 'Item not found' });
+        }
+    }).catch(err => {
+        res.status(500).json({ result: false, error: err });
+    });
+});
+module.exports = router;
 
 
 
