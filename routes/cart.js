@@ -20,6 +20,7 @@ router.get('/all', (req, res) => {
         res.json({ cart: data })
     });
 })
+
 router.delete('/delete/:id', (req, res) => {
     Cart.deleteOne({ _id: req.params.id }).then(deletedDoc => {
         if (deletedDoc.deletedCount > 0) {

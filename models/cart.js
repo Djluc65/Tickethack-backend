@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cartSchema = mongoose.Schema({
   da: String,
   date: String,
-  price: Number
+  price: String
 });
 
 const Cart = mongoose.model("carts", cartSchema);
